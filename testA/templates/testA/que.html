@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+  function ee()
+  {
+var checkboxes = document.getElementsByTagName('input');
+strl="";
+for (var i=0; i<checkboxes.length; i++)  {
+  if (checkboxes[i].type == 'checkbox' &&  checkboxes[i].checked)   {
+  x=checkboxes[i].id;
+    strl=strl+x+",";
+  }
+
+}
+
+ var s=document.getElementById('ggyy');
+ s.href="/testA/results/"+strl;
+ window.location="/testA/results/"+strl;
+  }
+        function ch(inputid , ccnts, chid)
+        {
+            var ids='h'+inputid;
+            var idss='g'+inputid;
+            if (document.getElementById(chid).checked) {
+                var x = parseInt( document.getElementById(ids).value);
+                var y = parseInt(document.getElementById(idss).value);
+                if (y<x)
+                {
+                    document.getElementById(idss).value= y+1;
+                }
+                else  document.getElementById(chid).checked=false;}
+            else
+            {
+                var x = parseInt( document.getElementById(ids).value);
+                var y = parseInt(document.getElementById(idss).value);
+                document.getElementById(idss).value= y-1;
+             }
+
+
+}
+
+    </script>
+</head>
+<body>
+{% if testitog %}
+    <ul>
+    {% for n in testitog %}
+    <div id={{ n.fv_idvopr }}>   <li>{{ n.fv_vopros }}</li>
+<input type="hidden" id="h{{n.fv_idvopr}}" value= {{n.ccnt}}>
+<input type="hidden" id="g{{n.fv_idvopr}}" value= 0>
+        {% for k in n.v_otvet_set.all %}
+        <p>
+      <input type="checkbox" id={{ k.idotvet }}  onclick="ch({{n.fv_idvopr}}, {{n.ccnt}},{{ k.idotvet }})">{{ k.otvet }}
+</p>
+        {% endfor %}
+    {% endfor %}
+        </div>
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+<input type="button" id ="rez" value="" onclick="ee()">
+
+
+</body>
+</html>

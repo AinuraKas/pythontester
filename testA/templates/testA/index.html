@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <title>ghghghghghghghgh</title>
+</head>
+<body>
+{% if kafedras %}
+    <ul>
+    {% for n in kafedras %}
+       <li><a href ="{% url 'dics' n.idkaf %}">  {{ n.kafedra }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+{% if predms %}
+    <ul>
+    {% for n in predms %}
+       <li> {{ n.predm }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>
+</html>
